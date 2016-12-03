@@ -23,7 +23,7 @@ public class TestException {
         try {
             temp += 1;
             int a = 1;
-            int b = (Math.random() * 10) % 2 > 2 ? 1 : 0;
+            int b = (Math.random() * 10) % 3 > 1 ? 1 : 0;
             int c = a / b;
         } catch (Exception e) {
             temp += 1;
@@ -49,7 +49,7 @@ public class TestException {
         try {
             temp += 1;
             int a = 1;
-            int b = (Math.random() * 10) % 2 > 2 ? 1 : 0;
+            int b = (Math.random() * 10) % 3 > 1 ? 1 : 0;
             int c = a / b;
         } catch (Exception e) {
             temp += 1;
