@@ -7,53 +7,60 @@ package com.xfl.exception;
  */
 public class TestException {
     public static void main(String[] args) {
-        System.out.println(test1());
-        System.out.println(test2());
+        int result1 = test1();
+        int result2 = test2();
+        System.out.println("最终的结果是: " + result1);
+        System.out.println("最终的结果是: " + result2);
     }
 
     /**
-     * 出异常返回4,不出异常返回5.finally是在return之前执行的
+     * 出异常返回3,不出异常返回4.finally是在return之前执行的
      *
      * @return
      */
-    private static String test1() {
-        String str = "1";
+    private static int test1() {
+        int temp = 1;
         try {
-            str = "2";
+            temp += 1;
             int a = 1;
-            int b = (Math.random() * 10) % 3 > 2 ? 1 : 0;
+            int b = (Math.random() * 10) % 2 > 2 ? 1 : 0;
             int c = a / b;
         } catch (Exception e) {
-            str = "3";
+            temp += 1;
             //执行return之前会先执行finally
-            return str;
+            System.out.println(temp);
+            return temp;
         } finally {
-            str = "4";
+            temp += 1;
+            System.out.println(temp);
         }
-        str = "5";
-        return str;
+        temp += 1;
+        System.out.println(temp);
+        return temp;
     }
 
     /**
-     * 出异常返回7,不出异常返回7.finally是在return之前执行的
+     * 出异常返回4,不出异常返回3.finally是在return之前执行的
      *
      * @return
      */
-    private static String test2() {
-        String str = "1";
+    private static int test2() {
+        int temp = 1;
         try {
-            str = "2";
+            temp += 1;
             int a = 1;
-            int b = (Math.random() * 10) % 3 > 2 ? 1 : 0;
+            int b = (Math.random() * 10) % 2 > 2 ? 1 : 0;
             int c = a / b;
         } catch (Exception e) {
-            str = "3";
+            temp += 1;
             //执行return之前会先执行finally
-            return str = "6";
+            System.out.println(temp);
+            return temp;
         } finally {
-            str = "4";
+            temp += 1;
             //finally中包含return时catch中的return不起作用了
-            return str = "7";
+            System.out.println(temp);
+            return temp;
         }
     }
 }
