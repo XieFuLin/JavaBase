@@ -11,10 +11,8 @@ import java.text.DecimalFormat;
  */
 public class TestBigDecimal {
     public static void main(String[] args) {
-//        System.out.println(0.06 + 0.01);
-//        System.out.println(1.0 - 0.42);
-//        System.out.println(4.015 * 100);
-//        System.out.println(303.1 / 1000);
+
+        //  Double.toString()  可以将double类型转化为String
         System.out.println(new BigDecimal("0.06"));
         BigDecimal a1 = new BigDecimal("123.2562");
         BigDecimal a2 = new BigDecimal("0.75");
@@ -23,8 +21,9 @@ public class TestBigDecimal {
         System.out.println(a1.divide(a2, 2));
         //加
         System.out.println(a1.add(a2));
-        //成
+        //乘
         System.out.println(a1.multiply(a2));
+        //减
         System.out.println(a1.subtract(a2));
         System.out.println(new BigDecimal("2.3").setScale(2));
         //只入不舍
@@ -35,17 +34,21 @@ public class TestBigDecimal {
         System.out.println("四舍五入" + a1.setScale(2, RoundingMode.HALF_UP));
         String number = "89" + "";
         DecimalFormat df2 = (DecimalFormat) DecimalFormat.getInstance();
+        //强制保留两位小数,不足的补0
         df2.applyPattern("0.00");
         System.out.println(df2.format(Double.parseDouble(number)));
         double d1 = 30.29;
         double d2 = 1.01;
-        BigDecimal a3 = new BigDecimal(d1 + "");
-        BigDecimal a4 = new BigDecimal(d2 + "");
-        System.out.println(a3.subtract(a4));
-        System.out.println(30.29 - 1.01);
         System.out.println(new BigDecimal(d1));
         System.out.println(new BigDecimal(d2));
-        System.out.println(d1 - d2);
         System.out.println(new BigDecimal(d1).subtract(new BigDecimal(d2)));
+        BigDecimal a3 = new BigDecimal(d1 + "");
+        BigDecimal a4 = new BigDecimal(d2 + "");
+        System.out.println(a3);
+        System.out.println(a4);
+        System.out.println(a3.subtract(a4));
+        System.out.println(30.29 - 1.01);
+        System.out.println(d1 - d2);
+
     }
 }
