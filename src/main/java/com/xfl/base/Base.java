@@ -3,7 +3,7 @@ package com.xfl.base;
 /**
  * Created by XFL
  * time on 2017/2/26 23:34
- * description:
+ * description:http://www.jianshu.com//p/39f91f3fba32
  */
 public class Base {
     private String baseName = "base";
