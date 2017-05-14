@@ -7,6 +7,7 @@ import java.net.Socket;
  * Created by XFL
  * time on 2017/5/14 21:22
  * description:生产者暴露服务
+ * http://javatar.iteye.com/blog/1123915
  */
 public class Provider {
     public static void export(final Object service, int port) throws Exception {

@@ -11,6 +11,7 @@ import java.net.Socket;
  * Created by XFL
  * time on 2017/5/14 22:12
  * description:消费者，调用服务
+ * http://javatar.iteye.com/blog/1123915
  */
 public class Consumer {
     public static <T> T refer(final Class<T> interfaceClass,
