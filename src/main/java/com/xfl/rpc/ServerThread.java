@@ -33,7 +33,7 @@ public class ServerThread extends Thread {
             //获取输出响应结果流
             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
             try {
-                Method method = null;
+                Method method;
                 //利用反射调用服务
                 method = service.getClass().getMethod(methodName, parameterTypes);
                 Object result = method.invoke(service, arguments);
