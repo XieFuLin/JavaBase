@@ -25,7 +25,7 @@ public class Consumer {
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
         System.out.println("Get remote service " + interfaceClass.getName() + " from server " + host + ":" + port);
-        //动态代理(消费者端关键代码)
+        //生成动态代理对象
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
                 Socket socket = new Socket(host, port);
@@ -56,9 +56,10 @@ public class Consumer {
     }
 
     public static void main(String[] args) throws Exception {
-        //获取代理方法
+        //此处返回的是动态代理对象
         HelloService service = refer(HelloService.class, "127.0.0.1", 1234);
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            //调用hello方法时会调用代理对象的invoke方法
             String hello = service.hello("World" + i);
             System.out.println(hello);
             Thread.sleep(1000);
