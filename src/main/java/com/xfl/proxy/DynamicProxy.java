@@ -16,9 +16,7 @@ public class DynamicProxy {
         Subject proxySubject = (Subject) Proxy.newProxyInstance(Subject.class.getClassLoader(),
                 new Class[]{Subject.class},
                 new ProxyHandler(real));
-
         proxySubject.doSomething();
-
         //write proxySubject class binary data to file
         createProxyClassFile();
     }
