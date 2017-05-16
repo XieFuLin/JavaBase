@@ -10,14 +10,17 @@ import java.sql.SQLException;
  */
 public class ClientThread extends Thread {
     private int wait;
+    private String threadName;
 
-    public ClientThread(int wait) {
+    public ClientThread(int wait, String threadName) {
         this.wait = wait;
+        this.threadName = threadName;
     }
 
     @Override
     public void run() {
         Connection connection = DBUtil.getConnection();
+        System.out.println("正在执行的线程: " + threadName);
         try {
             //模仿耗时操作任务
             Thread.sleep(wait);
@@ -26,7 +29,7 @@ public class ClientThread extends Thread {
         }
         try {
             //主要是为了验证数据库连接是否关闭，可以起到模仿数据库操作的效果
-            System.out.println(connection.getNetworkTimeout());
+            System.out.println("线程:" + threadName + " 的数据库连接是否关闭:" + connection.isClosed());
         } catch (SQLException e) {
             System.out.println(e);
         }
