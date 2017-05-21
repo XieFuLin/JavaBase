@@ -13,6 +13,7 @@ import java.util.Iterator;
 /**
  * TCP/IP的NIO非阻塞方式
  * 服务器端
+ * http://blog.csdn.net/eclipser1987/article/details/7329362
  */
 public class Server implements Runnable {
 
