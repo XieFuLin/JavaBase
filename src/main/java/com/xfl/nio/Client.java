@@ -41,7 +41,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        new Client().query("localhost", 8099);
 
+        new Client().query("localhost", 8099);
     }
 }
