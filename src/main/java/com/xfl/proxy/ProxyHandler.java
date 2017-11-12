@@ -1,7 +1,10 @@
 package com.xfl.proxy;
 
+import com.xfl.concurrent.DBUtil;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.sql.Connection;
 
 /**
  * Created by XFL
@@ -24,10 +27,13 @@ public class ProxyHandler implements InvocationHandler {
      */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //在转调具体目标对象之前，可以执行一些功能处理
-
+        Connection connection = DBUtil.getConnection();
+        connection.setAutoCommit(false);
         //转调具体目标对象的方法
-        return method.invoke(proxied, args);
-
+        Object result = method.invoke(proxied, args);
+        connection.rollback();
         //在转调具体目标对象之后，可以执行一些功能处理
+        DBUtil.closeConnection();
+        return result;
     }
 }

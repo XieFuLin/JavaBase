@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 public class DBUtil {
     // 数据库配置
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/shop";
+    private static final String url = "jdbc:mysql://localhost:3306/spring-boot";
     private static final String username = "XFL";
     private static final String password = "618033988";
     // 定义一个数据库连接
@@ -23,6 +23,9 @@ public class DBUtil {
     public static Connection getConnection() {
         //从ThreadLocal中获取Connection
         Connection conn = connContainer.get();
+        if (conn != null) {
+            return conn;
+        }
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);

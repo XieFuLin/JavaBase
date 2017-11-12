@@ -4,6 +4,7 @@ import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
 import java.lang.reflect.Proxy;
+import java.sql.SQLException;
 
 /**
  * Created by XFL
@@ -11,7 +12,7 @@ import java.lang.reflect.Proxy;
  * description:
  */
 public class DynamicProxy {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         RealSubject real = new RealSubject();
         //生成代理对象
         /**
