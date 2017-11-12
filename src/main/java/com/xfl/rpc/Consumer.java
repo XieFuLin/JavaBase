@@ -1,11 +1,6 @@
 package com.xfl.rpc;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.net.Socket;
 
 /**
  * Created by XFL
@@ -26,33 +21,7 @@ public class Consumer {
             throw new IllegalArgumentException("Invalid port " + port);
         System.out.println("Get remote service " + interfaceClass.getName() + " from server " + host + ":" + port);
         //生成动态代理对象
-        return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
-            public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
-                Socket socket = new Socket(host, port);
-                try {
-                    ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-                    try {
-                        output.writeUTF(method.getName());
-                        output.writeObject(method.getParameterTypes());
-                        output.writeObject(arguments);
-                        ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-                        try {
-                            Object result = input.readObject();
-                            if (result instanceof Throwable) {
-                                throw (Throwable) result;
-                            }
-                            return result;
-                        } finally {
-                            input.close();
-                        }
-                    } finally {
-                        output.close();
-                    }
-                } finally {
-                    socket.close();
-                }
-            }
-        });
+        return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new RpcProxyHandler(host, port));
     }
 
     public static void main(String[] args) throws Exception {
